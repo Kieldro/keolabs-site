@@ -1,0 +1,286 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const services = [
+  {
+    slug: "booking",
+    name: "Appointment booking bot",
+    body: "Inbound text → AI checks your calendar → books → confirms → sends reminders. Zero double-bookings, zero missed callbacks.",
+    for: "Dentists · trainers · salons · home services",
+  },
+  {
+    slug: "leads",
+    name: "Lead qualifier",
+    body: "Ads drive texts to one number. AI asks 3–5 qualifying questions, routes hot leads to sales instantly, nurtures the cold ones.",
+    for: "Real estate · contractors · agencies",
+  },
+  {
+    slug: "support",
+    name: "Support triage",
+    body: "AI answers FAQs from your knowledge base around the clock, escalates real edge cases to a human. Ticket volume drops 60–80%.",
+    for: "SaaS · ecommerce · service shops",
+  },
+  {
+    slug: "reviews",
+    name: "Review capture",
+    body: "Post-service text at the perfect moment. AI handles replies to negatives before they hit Google. Five-star average, on autopilot.",
+    for: "Local service · restaurants · retail",
+  },
+];
+
+const steps = [
+  {
+    num: "01",
+    title: "Free two-week pilot",
+    body: "We scope one automation, ship it, hand it to you. You get the working system, a case study, and three warm intros to peers.",
+  },
+  {
+    num: "02",
+    title: "Launch + measure",
+    body: "Your team runs it for two weeks. We measure bookings, qualified leads, deflected tickets, captured reviews — whatever ties to revenue.",
+  },
+  {
+    num: "03",
+    title: "Expand on results",
+    body: "Pilot converts to a paid engagement — monthly retainer or project. Add more automations, tune what works, retire what doesn't.",
+  },
+];
+---
+
+<Layout>
+  <div
+    class="pointer-events-none fixed inset-0 -z-10 opacity-[0.04]"
+    style="background-image: linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px); background-size: 48px 48px;"
+  >
+  </div>
+  <div
+    class="pointer-events-none fixed inset-0 -z-10"
+    style="background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(16,185,129,0.12), transparent 70%);"
+  >
+  </div>
+
+  <nav
+    class="sticky top-0 z-50 border-b border-white/5 bg-neutral-950/70 backdrop-blur"
+  >
+    <div
+      class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4"
+    >
+      <a href="/" class="flex items-center gap-2 font-semibold tracking-tight">
+        <span
+          class="inline-block h-2.5 w-2.5 rounded-sm bg-emerald-400 shadow-[0_0_12px_rgba(16,185,129,0.6)]"
+        ></span>
+        <span>Keo Labs</span>
+      </a>
+      <div class="flex items-center gap-6 text-sm text-neutral-400">
+        <a href="#what" class="hidden transition hover:text-white sm:inline"
+          >What we build</a
+        >
+        <a href="#how" class="hidden transition hover:text-white sm:inline"
+          >How it works</a
+        >
+        <a
+          href="#contact"
+          class="rounded-md border border-white/10 px-3 py-1.5 text-white transition hover:border-emerald-400/50 hover:bg-emerald-400/5"
+          >Book a pilot</a
+        >
+      </div>
+    </div>
+  </nav>
+
+  <section class="relative mx-auto max-w-6xl px-6 pt-24 pb-32 sm:pt-36">
+    <div
+      class="mb-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-neutral-400"
+    >
+      <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
+      Now taking free pilot clients
+    </div>
+    <h1
+      class="max-w-4xl text-5xl leading-[1.05] font-semibold tracking-tight text-white sm:text-7xl"
+    >
+      AI automation,<br />
+      <span
+        class="bg-gradient-to-r from-emerald-300 via-emerald-400 to-teal-300 bg-clip-text text-transparent"
+        >built and installed.</span
+      >
+    </h1>
+    <p class="mt-6 max-w-2xl text-lg text-neutral-400 sm:text-xl">
+      Stay ahead of the curve. We build and deploy AI that answers your
+      customers, books your calendar, and qualifies your leads — while your
+      competitors are still wondering if it works.
+    </p>
+    <div class="mt-10 flex flex-wrap items-center gap-4">
+      <a
+        href="#contact"
+        class="group inline-flex items-center gap-2 rounded-md bg-white px-5 py-3 text-sm font-medium text-neutral-950 transition hover:bg-emerald-300"
+      >
+        Book a free pilot
+        <span
+          class="transition group-hover:translate-x-0.5"
+          aria-hidden="true">→</span
+        >
+      </a>
+      <a
+        href="#what"
+        class="inline-flex items-center gap-2 rounded-md border border-white/10 px-5 py-3 text-sm font-medium text-neutral-200 transition hover:border-white/30"
+      >
+        See what we build
+      </a>
+    </div>
+
+    <div
+      class="mt-20 flex flex-wrap gap-x-10 gap-y-2 font-mono text-xs tracking-wide text-neutral-500 uppercase"
+    >
+      <span>Two-week pilot</span>
+      <span class="text-neutral-700">/</span>
+      <span>Paid only if it works</span>
+      <span class="text-neutral-700">/</span>
+      <span>Built in Python · FastAPI · Anthropic</span>
+    </div>
+  </section>
+
+  <section id="what" class="border-t border-white/5 py-24">
+    <div class="mx-auto max-w-6xl px-6">
+      <div class="mb-14 flex items-end justify-between gap-8">
+        <div>
+          <p
+            class="mb-3 font-mono text-xs tracking-wider text-emerald-400 uppercase"
+          >
+            / what we build
+          </p>
+          <h2
+            class="text-3xl font-semibold tracking-tight text-white sm:text-4xl"
+          >
+            Four automations. One weekend each.
+          </h2>
+        </div>
+        <p class="hidden max-w-sm text-sm text-neutral-500 sm:block">
+          Every build runs on your phone number, on your calendar, on your
+          tools. You own it end-to-end.
+        </p>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2">
+        {
+          services.map((s, i) => (
+            <div class="group relative overflow-hidden rounded-xl border border-white/5 bg-white/[0.02] p-7 transition hover:border-emerald-400/20 hover:bg-white/[0.04]">
+              <div class="mb-4 flex items-center justify-between">
+                <span class="font-mono text-xs text-neutral-500">
+                  0{i + 1}
+                </span>
+                <span class="font-mono text-xs text-neutral-600">
+                  {s.slug}
+                </span>
+              </div>
+              <h3 class="mb-2 text-xl font-semibold text-white">{s.name}</h3>
+              <p class="mb-5 text-neutral-400">{s.body}</p>
+              <p class="font-mono text-xs tracking-wide text-neutral-600 uppercase">
+                {s.for}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id="how" class="border-t border-white/5 py-24">
+    <div class="mx-auto max-w-6xl px-6">
+      <div class="mb-14">
+        <p
+          class="mb-3 font-mono text-xs tracking-wider text-emerald-400 uppercase"
+        >
+          / how it works
+        </p>
+        <h2
+          class="max-w-2xl text-3xl font-semibold tracking-tight text-white sm:text-4xl"
+        >
+          Pilot in two weeks. Scale if it works.
+        </h2>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {
+          steps.map((step) => (
+            <div class="rounded-xl border border-white/5 bg-white/[0.02] p-7">
+              <div class="mb-4 font-mono text-2xl text-emerald-400">
+                {step.num}
+              </div>
+              <h3 class="mb-3 text-lg font-semibold text-white">
+                {step.title}
+              </h3>
+              <p class="text-sm leading-relaxed text-neutral-400">
+                {step.body}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="border-t border-white/5 py-24">
+    <div class="mx-auto grid max-w-6xl gap-16 px-6 md:grid-cols-[1fr_2fr]">
+      <div>
+        <p
+          class="mb-3 font-mono text-xs tracking-wider text-emerald-400 uppercase"
+        >
+          / who builds this
+        </p>
+        <h2
+          class="text-3xl font-semibold tracking-tight text-white sm:text-4xl"
+        >
+          Operator-built. Not a slide deck.
+        </h2>
+      </div>
+      <div class="space-y-5 text-lg leading-relaxed text-neutral-400">
+        <p>
+          Keo Labs is run by an engineer who ships. A decade of software, a
+          lot of Python, and a personal stack of AI agents that already run a
+          voice assistant, a fitness coach, and a home automation system.
+        </p>
+        <p>
+          The SMBs on your block will adopt AI in the next two years. The
+          ones that adopt it this year win. We're here to make sure that's
+          you.
+        </p>
+        <p class="font-mono text-sm text-neutral-500">
+          — Keo Labs · Austin, TX
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="border-t border-white/5 py-28">
+    <div class="mx-auto max-w-3xl px-6 text-center">
+      <p
+        class="mb-4 font-mono text-xs tracking-wider text-emerald-400 uppercase"
+      >
+        / book a pilot
+      </p>
+      <h2
+        class="mb-6 text-4xl font-semibold tracking-tight text-white sm:text-5xl"
+      >
+        Two weeks. Zero risk. One working automation.
+      </h2>
+      <p class="mb-10 text-lg text-neutral-400">
+        We're taking a small number of free pilot clients to build case
+        studies. Tell us what's slow in your business — we'll tell you what
+        we'd automate first.
+      </p>
+      <a
+        href="mailto:hello@keolabs.ai?subject=Pilot%20request&body=What%20I%20run%3A%0AWhat%27s%20slow%3A%0ABest%20way%20to%20reach%20me%3A"
+        class="inline-flex items-center gap-2 rounded-md bg-emerald-400 px-6 py-3.5 text-sm font-semibold text-neutral-950 transition hover:bg-emerald-300"
+      >
+        hello@keolabs.ai
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </section>
+
+  <footer class="border-t border-white/5 py-10">
+    <div
+      class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 font-mono text-xs text-neutral-600"
+    >
+      <span>© 2026 Keo Labs</span>
+      <span>Stay ahead of the curve.</span>
+    </div>
+  </footer>
+</Layout>
