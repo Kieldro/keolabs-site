@@ -1,0 +1,2 @@
+[   26402ms] [WARNING] mic prewarm failed, continuing: mic prompt timed out after 10s @ https://keolabs-voice.pages.dev/_next/static/chunks/app/page-a6cde4fe694294a5.js:0
+[   27385ms] [WARNING] Item with key lk-user-choices does not exist in local storage. @ https://keolabs-voice.pages.dev/_next/static/chunks/174-1702d5a968cf3ba1.js:61

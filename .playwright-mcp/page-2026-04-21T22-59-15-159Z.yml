@@ -1,0 +1,35 @@
+- generic [ref=e1]:
+  - banner [ref=e2]:
+    - link "Keolabs Logo" [ref=e3] [cursor=pointer]:
+      - /url: https://livekit.io
+      - img "Keolabs Logo" [ref=e4]
+    - generic [ref=e5]:
+      - text: Built with
+      - link "LiveKit Agents" [ref=e6] [cursor=pointer]:
+        - /url: https://docs.livekit.io/agents
+  - main [ref=e7]:
+    - generic [ref=e19]:
+      - button "Mute microphone" [ref=e20]: LIVE — tap to mute
+      - log [ref=e24]
+      - generic [ref=e27]:
+        - paragraph: Agent is listening, ask it a question
+        - generic "Voice assistant controls" [ref=e29]:
+          - generic [ref=e31]:
+            - textbox "Type something..." [active] [ref=e32]
+            - button "Send" [disabled]:
+              - img
+          - generic [ref=e33]:
+            - generic [ref=e34]:
+              - generic [ref=e35]:
+                - button "Toggle microphone" [pressed] [ref=e36]:
+                  - img
+                - combobox [ref=e41]:
+                  - img
+              - button "Toggle chat" [pressed] [ref=e42]:
+                - img
+            - button "END CALL" [ref=e43]:
+              - img
+              - generic [ref=e44]: END CALL
+  - button "Show debug panel" [ref=e17]: debug
+  - region "Notifications alt+T"
+  - alert [ref=e18]
