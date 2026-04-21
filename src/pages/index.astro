@@ -9,6 +9,12 @@ const services = [
     for: "Dental · auto · law · home services · clinics",
   },
   {
+    slug: "sms-concierge",
+    name: "AI SMS concierge",
+    body: "Your own phone number, Claude on the other end. Answers questions, qualifies leads, books calls, sends proactive follow-ups. Lives on your Cloudflare and Twilio — your data, your infra, no lock-in.",
+    for: "Service businesses · agencies · coaches · clinics",
+  },
+  {
     slug: "booking",
     name: "Appointment booking bot",
     body: "Inbound text → AI checks your calendar → books → confirms → sends reminders. Zero double-bookings, zero missed callbacks.",
@@ -140,7 +146,7 @@ const steps = [
       <span class="text-neutral-700">/</span>
       <span>Paid only if it works</span>
       <span class="text-neutral-700">/</span>
-      <span>Python · LiveKit · Anthropic · Cartesia</span>
+      <span>TypeScript · Cloudflare Workers · Claude · Twilio · LiveKit</span>
     </div>
   </section>
 
@@ -238,9 +244,16 @@ const steps = [
       </div>
       <div class="space-y-5 text-lg leading-relaxed text-neutral-400">
         <p>
-          Keo Labs is run by an engineer who ships. A decade of software, a
-          lot of Python, and a personal stack of AI agents that already run a
-          voice assistant, a fitness coach, and a home automation system.
+          Keo Labs is run by an engineer who ships. A decade of software and
+          a personal stack of AI agents that already run a voice assistant, a
+          fitness coach, a home automation system, and an SMS concierge that
+          answers our own inbound line.
+        </p>
+        <p>
+          Our AI SMS concierge is built on Cloudflare Workers + Durable
+          Objects + Claude Haiku 4.5 + Twilio. Every client gets their own
+          deploy — their account, their number, their data. We keep the
+          template sharp; you keep the pipes.
         </p>
         <p>
           The SMBs on your block will adopt AI in the next two years. The
