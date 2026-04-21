@@ -1,0 +1,140 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link "Keo Labs" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e6]: Keo Labs
+      - generic [ref=e7]:
+        - link "What we build" [ref=e8] [cursor=pointer]:
+          - /url: "#what"
+        - link "How it works" [ref=e9] [cursor=pointer]:
+          - /url: "#how"
+        - link "Live demo" [ref=e10] [cursor=pointer]:
+          - /url: "#demo"
+        - link "Book a pilot" [ref=e11] [cursor=pointer]:
+          - /url: "#contact"
+  - generic [ref=e12]:
+    - generic [ref=e13]: Now taking free pilot clients
+    - heading "AI automation, built and installed." [level=1] [ref=e15]:
+      - text: AI automation,
+      - text: built and installed.
+    - paragraph [ref=e16]: Stay ahead of the curve. We build and deploy AI that answers your customers, books your calendar, and qualifies your leads — while your competitors are still wondering if it works.
+    - generic [ref=e17]:
+      - link "Book a free pilot" [ref=e18] [cursor=pointer]:
+        - /url: "#contact"
+        - text: Book a free pilot
+        - generic [ref=e19]: →
+      - link "Try the live demo" [ref=e20] [cursor=pointer]:
+        - /url: "#demo"
+        - text: Try the live demo
+        - generic [ref=e21]: ↓
+      - link "See what we build" [ref=e22] [cursor=pointer]:
+        - /url: "#what"
+    - generic [ref=e23]:
+      - generic [ref=e24]: Two-week pilot
+      - generic [ref=e25]: /
+      - generic [ref=e26]: Paid only if it works
+      - generic [ref=e27]: /
+      - generic [ref=e28]: You own the number, the account, and the data
+  - generic [ref=e30]:
+    - generic [ref=e31]:
+      - generic [ref=e32]:
+        - paragraph [ref=e33]: / what we build
+        - heading "Five automations. Built and installed." [level=2] [ref=e34]
+      - paragraph [ref=e35]: Every build runs on your phone number, on your calendar, on your tools. You own it end-to-end.
+    - generic [ref=e36]:
+      - generic [ref=e37]:
+        - generic [ref=e38]:
+          - generic [ref=e39]: "01"
+          - generic [ref=e40]: voice
+        - heading "AI phone receptionist" [level=3] [ref=e41]
+        - paragraph [ref=e42]: 24/7 AI answers your business line, books appointments, handles FAQs, transfers real emergencies. Sounds like a real person. Weekly recordings delivered.
+        - paragraph [ref=e43]: Dental · auto · law · home services · clinics
+      - generic [ref=e44]:
+        - generic [ref=e45]:
+          - generic [ref=e46]: "02"
+          - generic [ref=e47]: sms-concierge
+        - heading "AI SMS concierge" [level=3] [ref=e48]
+        - paragraph [ref=e49]: Your own phone number. AI on the other end answers questions, qualifies leads, books calls, and sends proactive follow-ups. Lives on your accounts — your number, your data, no lock-in.
+        - paragraph [ref=e50]: Service businesses · agencies · coaches · clinics
+      - generic [ref=e51]:
+        - generic [ref=e52]:
+          - generic [ref=e53]: "03"
+          - generic [ref=e54]: booking
+        - heading "Appointment booking bot" [level=3] [ref=e55]
+        - paragraph [ref=e56]: Inbound text → AI checks your calendar → books → confirms → sends reminders. Zero double-bookings, zero missed callbacks.
+        - paragraph [ref=e57]: Dentists · trainers · salons · home services
+      - generic [ref=e58]:
+        - generic [ref=e59]:
+          - generic [ref=e60]: "04"
+          - generic [ref=e61]: leads
+        - heading "Lead qualifier" [level=3] [ref=e62]
+        - paragraph [ref=e63]: Ads drive texts to one number. AI asks 3–5 qualifying questions, routes hot leads to sales instantly, nurtures the cold ones.
+        - paragraph [ref=e64]: Real estate · contractors · agencies
+      - generic [ref=e65]:
+        - generic [ref=e66]:
+          - generic [ref=e67]: "05"
+          - generic [ref=e68]: support
+        - heading "Support triage" [level=3] [ref=e69]
+        - paragraph [ref=e70]: AI answers FAQs from your knowledge base around the clock, escalates real edge cases to a human. Ticket volume drops 60–80%.
+        - paragraph [ref=e71]: SaaS · ecommerce · service shops
+  - generic [ref=e73]:
+    - generic [ref=e74]:
+      - paragraph [ref=e75]: / how it works
+      - heading "Pilot in two weeks. Scale if it works." [level=2] [ref=e76]
+    - generic [ref=e77]:
+      - generic [ref=e78]:
+        - generic [ref=e79]: "01"
+        - heading "Free two-week pilot" [level=3] [ref=e80]
+        - paragraph [ref=e81]: We scope one automation, ship it, hand it to you. You get the working system, a case study, and three warm intros to peers.
+      - generic [ref=e82]:
+        - generic [ref=e83]: "02"
+        - heading "Launch + measure" [level=3] [ref=e84]
+        - paragraph [ref=e85]: Your team runs it for two weeks. We measure bookings, qualified leads, deflected tickets, captured reviews — whatever ties to revenue.
+      - generic [ref=e86]:
+        - generic [ref=e87]: "03"
+        - heading "Expand on results" [level=3] [ref=e88]
+        - paragraph [ref=e89]: Pilot converts to a paid engagement — monthly retainer or project. Add more automations, tune what works, retire what doesn't.
+  - generic [ref=e91]:
+    - generic [ref=e92]:
+      - paragraph [ref=e93]: / who builds this
+      - heading "Operator-built. Not a slide deck." [level=2] [ref=e94]
+    - generic [ref=e95]:
+      - paragraph [ref=e96]: Keo Labs is a shop of engineers who ship. A decade of software experience behind us and a stack of AI agents already running in production — a voice assistant, a fitness coach, a home automation system, and an SMS concierge that answers our own inbound line.
+      - paragraph [ref=e97]: Every client gets their own deploy — their account, their number, their data. We keep the template sharp; you keep the pipes.
+      - paragraph [ref=e98]: The SMBs on your block will adopt AI in the next two years. The ones that adopt it this year win. We're here to make sure that's you.
+      - paragraph [ref=e99]: — Keo Labs · Austin, TX
+  - generic [ref=e101]:
+    - generic [ref=e102]:
+      - paragraph [ref=e103]: / try it live
+      - heading "Talk to a real voice agent in your browser." [level=2] [ref=e104]
+      - paragraph [ref=e105]: No phone number, no signup. Click below, allow microphone, and have a conversation. This is the exact stack we deploy for clients — just pointed at a demo auto-repair script.
+    - iframe [ref=e127]:
+      - generic [active] [ref=f1e1]:
+        - main [ref=f1e2]:
+          - generic [ref=f1e3]:
+            - generic [ref=f1e4]:
+              - img [ref=f1e5]
+              - paragraph [ref=f1e7]: Chat live with your voice AI agent
+              - button "Start demo call" [ref=f1e8]
+            - paragraph [ref=f1e10]:
+              - text: Need help getting set up? Check out the
+              - link "Voice AI quickstart" [ref=f1e11] [cursor=pointer]:
+                - /url: https://docs.livekit.io/agents/start/voice-ai/
+              - text: .
+        - button "Show debug panel" [ref=f1e12]: debug
+        - region "Notifications alt+T"
+        - alert [ref=f1e13]
+    - paragraph [ref=e115]: Works best on Chrome / Safari with microphone permission granted.
+  - generic [ref=e117]:
+    - paragraph [ref=e118]: / book a pilot
+    - heading "Two weeks. Zero risk. One working automation." [level=2] [ref=e119]
+    - paragraph [ref=e120]: We're taking a small number of free pilot clients to build case studies. Tell us what's slow in your business — we'll tell you what we'd automate first.
+    - link "hello@keolabs.ai" [ref=e121] [cursor=pointer]:
+      - /url: mailto:hello@keolabs.ai?subject=Pilot%20request&body=What%20I%20run%3A%0AWhat%27s%20slow%3A%0ABest%20way%20to%20reach%20me%3A
+      - text: hello@keolabs.ai
+      - generic [ref=e122]: →
+  - contentinfo [ref=e123]:
+    - generic [ref=e124]:
+      - generic [ref=e125]: © 2026 Keo Labs
+      - generic [ref=e126]: Stay ahead of the curve.

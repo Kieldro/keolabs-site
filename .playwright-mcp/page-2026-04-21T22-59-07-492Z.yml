@@ -1,0 +1,23 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - link "Keolabs Logo" [ref=e3] [cursor=pointer]:
+      - /url: https://livekit.io
+      - img "Keolabs Logo" [ref=e4]
+    - generic [ref=e5]:
+      - text: Built with
+      - link "LiveKit Agents" [ref=e6] [cursor=pointer]:
+        - /url: https://docs.livekit.io/agents
+  - main [ref=e7]:
+    - generic [ref=e8]:
+      - generic [ref=e9]:
+        - img [ref=e10]
+        - paragraph [ref=e12]: Chat live with your voice AI agent
+        - button "Start demo call" [ref=e13]
+      - paragraph [ref=e15]:
+        - text: Need help getting set up? Check out the
+        - link "Voice AI quickstart" [ref=e16] [cursor=pointer]:
+          - /url: https://docs.livekit.io/agents/start/voice-ai/
+        - text: .
+  - button "Show debug panel" [ref=e17]: debug
+  - region "Notifications alt+T"
+  - alert [ref=e18]

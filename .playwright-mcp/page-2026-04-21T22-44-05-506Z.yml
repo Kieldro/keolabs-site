@@ -1,0 +1,35 @@
+- generic [ref=e1]:
+  - banner [ref=e2]:
+    - link "Keolabs Logo" [ref=e3] [cursor=pointer]:
+      - /url: https://livekit.io
+      - img "Keolabs Logo" [ref=e4]
+    - generic [ref=e5]:
+      - text: Built with
+      - link "LiveKit Agents" [ref=e6] [cursor=pointer]:
+        - /url: https://docs.livekit.io/agents
+  - main [ref=e7]:
+    - generic [ref=e19]:
+      - generic [ref=e20]:
+        - strong [ref=e21]: Microphone not granted yet.
+        - text: Tap the big red button below — your browser will ask for permission.
+      - button "Unmute microphone" [ref=e22]: MUTED — tap to talk
+      - log [ref=e53]:
+        - generic "5:43:22 PM Central Daylight Time" [ref=e56]:
+          - paragraph [ref=e59]: Bob's Auto, how can I help?
+      - generic "Voice assistant controls" [ref=e35]:
+        - generic [ref=e37]:
+          - textbox "Type something..." [ref=e38]
+          - button "Send" [disabled]:
+            - img
+        - generic [ref=e39]:
+          - generic [ref=e40]:
+            - button "Toggle microphone" [ref=e42]:
+              - img
+            - button "Toggle transcript" [active] [pressed] [ref=e43]:
+              - img
+          - button "END CALL" [ref=e44]:
+            - img
+            - generic [ref=e45]: END CALL
+  - button "Show debug panel" [ref=e17]: debug
+  - region "Notifications alt+T"
+  - alert [ref=e18]
