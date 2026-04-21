@@ -4,9 +4,13 @@ import Layout from "../layouts/Layout.astro";
 // The voice demo runs in a separate repo (keolabs-voice-agent + keolabs-web-frontend).
 // Keep this site loosely coupled: only the URL below ties the two together.
 // Override via VOICE_DEMO_URL env var at build time.
+//
+// Stable Cloudflare Pages deployment. Switch to https://demo.keolabs.ai once
+// the Porkbun CNAME is added (demo → keolabs-voice.pages.dev). The previous
+// rotating trycloudflare.com URL invalidated user mic permission on every
+// restart — the new stable origin persists the grant.
 const VOICE_DEMO_URL =
-  import.meta.env.VOICE_DEMO_URL ??
-  "https://non-sky-vitamins-sunrise.trycloudflare.com";
+  import.meta.env.VOICE_DEMO_URL ?? "https://keolabs-voice.pages.dev";
 
 const services = [
   {
