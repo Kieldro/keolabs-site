@@ -39,3 +39,12 @@ jobs:
     steps:
       - uses: actions/deploy-pages@v4
         id: deployment
+      - name: Notify ntfy.sh on success
+        if: success()
+        run: |
+          curl -s \
+            -H "Title: keolabs.ai deployed" \
+            -H "Tags: rocket,white_check_mark" \
+            -H "Click: ${{ steps.deployment.outputs.page_url }}" \
+            -d "${{ github.event.head_commit.message }}" \
+            https://ntfy.sh/keolabs-deploys-7ea5b2a08245
