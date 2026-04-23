@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Response>
   <Dial answerOnBridge="true">
-    <Sip>sip:keolabs-voice-agent-1zpgfict.sip.livekit.cloud;transport=tcp</Sip>
+    <Sip>sip:+12545365227@keolabs-voice-agent-1zpgfict.sip.livekit.cloud;transport=tcp</Sip>
   </Dial>
 </Response>
