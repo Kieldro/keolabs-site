@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Response>
   <Connect>
-    <ConversationRelay url="wss://keolabs-cr.kieldro.workers.dev/cr" ttsProvider="Amazon" voice="Joanna-Neural" welcomeGreeting="Thanks for calling Keolabs. I'm Aria, the AI receptionist, and also the product we sell. How can I help?" />
+    <ConversationRelay url="wss://keolabs-cr.kieldro.workers.dev/cr" ttsProvider="ElevenLabs" voice="ZF6FPAbjXT4488VcRRnw" welcomeGreeting="Thanks for calling Keolabs. I'm Aria, the AI receptionist, and also the product we sell. How can I help?" />
   </Connect>
 </Response>
