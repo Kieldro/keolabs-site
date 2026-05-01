@@ -26,24 +26,24 @@ Submit at: https://console.twilio.com/us1/develop/sms/regulatory-compliance/toll
 - Use case category: **Mixed** (covers both confirmations and occasional marketing; safer than Customer Care which is stricter)
 - Use case description:
 
-  > Keo Labs operates AI phone receptionists for small businesses. When a
-  > consumer calls a Keo Labs–powered number and provides their phone number
-  > during the call, the AI agent sends one follow-up SMS summarizing what
-  > was discussed and any next steps (e.g., a booked appointment time, a
-  > quote, or a confirmation that a human will follow up). Volume is low
-  > (< 1,000 messages / month). One message per call. No marketing blasts.
+Keo Labs operates AI phone receptionists for small businesses. When a
+consumer calls a Keo Labs–powered number and provides their phone number
+during the call, the AI agent sends one follow-up SMS summarizing what
+was discussed and any next steps (e.g., a booked appointment time, a
+quote, or a confirmation that a human will follow up). Volume is low
+(< 1,000 messages / month). One message per call. No marketing blasts.
 
 ## Opt-in
 
 - Opt-in type: **Verbal**
 - Opt-in workflow description:
 
-  > The consumer verbally provides their phone number during an inbound
-  > phone call with our AI receptionist. The AI agent confirms on-call that
-  > a text recap will be sent to that number after the call ends. By
-  > providing the number, the consumer consents to receive that single
-  > follow-up SMS per call. The call recording and transcript document the
-  > consent.
+The consumer verbally provides their phone number during an inbound
+phone call with our AI receptionist. The AI agent confirms on-call that
+a text recap will be sent to that number after the call ends. By
+providing the number, the consumer consents to receive that single
+follow-up SMS per call. The call recording and transcript document the
+consent.
 
 - Message frequency: `1 message per call, approximately < 1,000 messages per month total across all clients`
 

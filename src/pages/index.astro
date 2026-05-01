@@ -1,4 +1,7 @@
 ---
+import fs from "node:fs";
+import path from "node:path";
+import yaml from "js-yaml";
 import Layout from "../layouts/Layout.astro";
 
 // The voice demo runs in a separate repo (keolabs-voice-agent + keolabs-web-frontend).
@@ -11,6 +14,35 @@ import Layout from "../layouts/Layout.astro";
 // restart — the new stable origin persists the grant.
 const VOICE_DEMO_URL =
   import.meta.env.VOICE_DEMO_URL ?? "https://keolabs-voice.pages.dev";
+
+// Auto-discover demo profiles from the sibling voice-agent repo at build time.
+// Each profile is one client config under voice-agent/clients/<slug>/config.yaml.
+// Falls back to a single default profile if voice-agent isn't available
+// (e.g. in CI building only this repo).
+interface DemoProfile {
+  slug: string;
+  name: string;
+}
+function loadDemoProfiles(): DemoProfile[] {
+  const clientsDir = path.resolve(process.cwd(), "../voice-agent/clients");
+  if (!fs.existsSync(clientsDir)) return [];
+  const entries = fs.readdirSync(clientsDir, { withFileTypes: true });
+  const profiles: DemoProfile[] = [];
+  for (const e of entries) {
+    if (!e.isDirectory() || e.name.startsWith("_")) continue;
+    const cfgPath = path.join(clientsDir, e.name, "config.yaml");
+    if (!fs.existsSync(cfgPath)) continue;
+    const cfg = yaml.load(fs.readFileSync(cfgPath, "utf8")) as
+      | { client_id?: string; display_name?: string }
+      | null;
+    if (cfg?.client_id && cfg?.display_name) {
+      profiles.push({ slug: cfg.client_id, name: cfg.display_name });
+    }
+  }
+  return profiles.sort((a, b) => a.name.localeCompare(b.name));
+}
+const demoProfiles = loadDemoProfiles();
+const useDropdown = demoProfiles.length > 8;
 
 const services = [
   {
@@ -307,6 +339,51 @@ const steps = [
         </p>
       </div>
 
+      {
+        demoProfiles.length > 1 && (
+          <div class="mx-auto mb-6 flex max-w-3xl items-center justify-center">
+            {useDropdown ? (
+              <label class="flex items-center gap-3 text-sm text-neutral-400">
+                <span class="font-mono text-xs uppercase tracking-wider">
+                  profile
+                </span>
+                <select
+                  id="demo-profile-select"
+                  class="rounded-md border border-white/10 bg-neutral-900 px-3 py-2 text-sm text-white focus:border-red-400 focus:outline-none"
+                >
+                  {demoProfiles.map((p) => (
+                    <option value={p.slug}>{p.name}</option>
+                  ))}
+                </select>
+              </label>
+            ) : (
+              <div
+                class="flex flex-wrap justify-center gap-2"
+                role="tablist"
+                id="demo-profile-tabs"
+              >
+                {demoProfiles.map((p, i) => (
+                  <button
+                    type="button"
+                    role="tab"
+                    data-slug={p.slug}
+                    aria-selected={i === 0 ? "true" : "false"}
+                    class:list={[
+                      "rounded-full border px-4 py-1.5 text-sm font-medium transition",
+                      i === 0
+                        ? "border-red-400/60 bg-red-400/10 text-red-200"
+                        : "border-white/10 bg-white/[0.02] text-neutral-400 hover:border-white/20 hover:text-white",
+                    ]}
+                  >
+                    {p.name}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        )
+      }
+
       <div
         class="relative mx-auto aspect-[3/4] max-w-md overflow-hidden rounded-2xl border border-white/10 bg-neutral-950 shadow-2xl sm:aspect-video sm:max-w-3xl"
       >
@@ -340,12 +417,14 @@ const steps = [
           <button
             id="demo-launch"
             data-demo-url={VOICE_DEMO_URL}
+            data-active-slug={demoProfiles[0]?.slug ?? ""}
             class="inline-flex items-center gap-2 rounded-md bg-red-400 px-5 py-3 text-sm font-semibold text-neutral-950 transition hover:bg-red-300"
           >
             Launch demo
             <span aria-hidden="true">→</span>
           </button>
           <a
+            id="demo-open-tab"
             href={VOICE_DEMO_URL}
             target="_blank"
             rel="noopener noreferrer"
@@ -367,6 +446,45 @@ const steps = [
       const btn = document.getElementById("demo-launch");
       if (!btn) return;
 
+      const baseUrl = btn.getAttribute("data-demo-url") || "";
+      const openTab = document.getElementById("demo-open-tab");
+
+      function urlFor(slug) {
+        if (!slug) return baseUrl;
+        const sep = baseUrl.includes("?") ? "&" : "?";
+        return baseUrl + sep + "client=" + encodeURIComponent(slug);
+      }
+
+      function setActiveSlug(slug) {
+        btn.setAttribute("data-active-slug", slug || "");
+        if (openTab) openTab.setAttribute("href", urlFor(slug));
+      }
+
+      // Tab strip wiring (≤8 profiles).
+      const tabs = document.querySelectorAll("#demo-profile-tabs [role='tab']");
+      tabs.forEach(function (t) {
+        t.addEventListener("click", function () {
+          tabs.forEach(function (other) {
+            other.setAttribute("aria-selected", "false");
+            other.classList.remove("border-red-400/60", "bg-red-400/10", "text-red-200");
+            other.classList.add("border-white/10", "bg-white/[0.02]", "text-neutral-400");
+          });
+          t.setAttribute("aria-selected", "true");
+          t.classList.remove("border-white/10", "bg-white/[0.02]", "text-neutral-400");
+          t.classList.add("border-red-400/60", "bg-red-400/10", "text-red-200");
+          setActiveSlug(t.getAttribute("data-slug"));
+        });
+      });
+
+      // Dropdown wiring (>8 profiles).
+      const sel = document.getElementById("demo-profile-select");
+      if (sel) {
+        setActiveSlug(sel.value);
+        sel.addEventListener("change", function () {
+          setActiveSlug(sel.value);
+        });
+      }
+
       function showOffline(container, url) {
         container.innerHTML =
           '<div class="flex h-full w-full flex-col items-center justify-center gap-4 p-6 text-center">' +
@@ -378,7 +496,8 @@ const steps = [
       }
 
       btn.addEventListener("click", async function () {
-        const url = btn.getAttribute("data-demo-url");
+        const slug = btn.getAttribute("data-active-slug") || "";
+        const url = urlFor(slug);
         if (!url) return;
         const container = btn.closest(".relative");
         if (!container) return;
@@ -392,7 +511,7 @@ const steps = [
         try {
           const ctl = new AbortController();
           const timer = setTimeout(() => ctl.abort(), 4000);
-          await fetch(url, { mode: "no-cors", signal: ctl.signal });
+          await fetch(baseUrl, { mode: "no-cors", signal: ctl.signal });
           clearTimeout(timer);
           reachable = true;
         } catch (_) {
