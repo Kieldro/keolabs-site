@@ -63,10 +63,17 @@ jobs:
         id: deployment
       - name: Notify ntfy.sh on success
         if: success()
+        # Pass the commit message via env var, NOT direct ${{ }} substitution,
+        # so multi-line messages (newlines, asterisks, dashes) do not break the
+        # bash command. `|| true` ensures the notification step never fails the
+        # deploy job.
+        env:
+          NTFY_BODY: ${{ github.event.head_commit.message || github.event.action || 'scheduled rebuild' }}
+          NTFY_CLICK: ${{ steps.deployment.outputs.page_url }}
         run: |
           curl -s \
             -H "Title: keolabs.ai deployed" \
             -H "Tags: rocket,white_check_mark" \
-            -H "Click: ${{ steps.deployment.outputs.page_url }}" \
-            -d "${{ github.event.head_commit.message || github.event.action || 'scheduled rebuild' }}" \
-            https://ntfy.sh/keolabs-deploys-7ea5b2a08245
+            -H "Click: $NTFY_CLICK" \
+            -d "$NTFY_BODY" \
+            https://ntfy.sh/keolabs-deploys-7ea5b2a08245 || true
