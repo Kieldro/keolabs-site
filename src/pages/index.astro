@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import yaml from "js-yaml";
 import Layout from "../layouts/Layout.astro";
+import demosFallback from "../data/demos.json";
 
 // The voice demo runs in a separate repo (keolabs-voice-agent + keolabs-web-frontend).
 // Keep this site loosely coupled: only the URL below ties the two together.
@@ -15,31 +16,40 @@ import Layout from "../layouts/Layout.astro";
 const VOICE_DEMO_URL =
   import.meta.env.VOICE_DEMO_URL ?? "https://keolabs-voice.pages.dev";
 
-// Auto-discover demo profiles from the sibling voice-agent repo at build time.
-// Each profile is one client config under voice-agent/clients/<slug>/config.yaml.
-// Falls back to a single default profile if voice-agent isn't available
-// (e.g. in CI building only this repo).
+// Discover demo profiles. Prefer the sibling voice-agent repo at build
+// time so adding a new client is one yaml edit; fall back to the
+// checked-in `src/data/demos.json` manifest in environments where the
+// voice-agent isn't available (GitHub Pages CI, fresh clone).
+//
+// To add a profile: add it under voice-agent/clients/<slug>/config.yaml
+// AND mirror it into demos.json so the next CI build picks it up.
 interface DemoProfile {
   slug: string;
   name: string;
 }
 function loadDemoProfiles(): DemoProfile[] {
   const clientsDir = path.resolve(process.cwd(), "../voice-agent/clients");
-  if (!fs.existsSync(clientsDir)) return [];
-  const entries = fs.readdirSync(clientsDir, { withFileTypes: true });
-  const profiles: DemoProfile[] = [];
-  for (const e of entries) {
-    if (!e.isDirectory() || e.name.startsWith("_")) continue;
-    const cfgPath = path.join(clientsDir, e.name, "config.yaml");
-    if (!fs.existsSync(cfgPath)) continue;
-    const cfg = yaml.load(fs.readFileSync(cfgPath, "utf8")) as
-      | { client_id?: string; display_name?: string }
-      | null;
-    if (cfg?.client_id && cfg?.display_name) {
-      profiles.push({ slug: cfg.client_id, name: cfg.display_name });
+  if (fs.existsSync(clientsDir)) {
+    const entries = fs.readdirSync(clientsDir, { withFileTypes: true });
+    const profiles: DemoProfile[] = [];
+    for (const e of entries) {
+      if (!e.isDirectory() || e.name.startsWith("_")) continue;
+      const cfgPath = path.join(clientsDir, e.name, "config.yaml");
+      if (!fs.existsSync(cfgPath)) continue;
+      const cfg = yaml.load(fs.readFileSync(cfgPath, "utf8")) as
+        | { client_id?: string; display_name?: string }
+        | null;
+      if (cfg?.client_id && cfg?.display_name) {
+        profiles.push({ slug: cfg.client_id, name: cfg.display_name });
+      }
+    }
+    if (profiles.length > 0) {
+      return profiles.sort((a, b) => a.name.localeCompare(b.name));
     }
   }
-  return profiles.sort((a, b) => a.name.localeCompare(b.name));
+  return [...(demosFallback as DemoProfile[])].sort((a, b) =>
+    a.name.localeCompare(b.name),
+  );
 }
 const demoProfiles = loadDemoProfiles();
 const useDropdown = demoProfiles.length > 8;
@@ -166,14 +176,21 @@ const steps = [
         >
       </a>
       <a
-        href="#demo"
+        href="tel:+12545365227"
         class="group inline-flex items-center gap-2 rounded-md border border-red-400/40 bg-red-400/10 px-5 py-3 text-sm font-medium text-red-200 transition hover:border-red-400/70 hover:bg-red-400/20"
       >
-        Try the live demo
+        Call (254) 536-5227 — hear it now
         <span
           class="transition group-hover:translate-x-0.5"
-          aria-hidden="true">↓</span
+          aria-hidden="true">↗</span
         >
+      </a>
+      <a
+        href="#demo"
+        class="inline-flex items-center gap-2 rounded-md border border-white/10 px-5 py-3 text-sm font-medium text-neutral-200 transition hover:border-white/30"
+      >
+        Try in browser
+        <span class="text-neutral-500" aria-hidden="true">↓</span>
       </a>
       <a
         href="#what"
@@ -321,21 +338,36 @@ const steps = [
         <h2
           class="mb-4 text-3xl font-semibold tracking-tight text-white sm:text-4xl"
         >
-          Talk to a real voice agent in your browser.
+          Hear a real voice agent — right now.
         </h2>
-        <p class="mx-auto max-w-2xl text-neutral-400">
-          No phone number, no signup. Click below, allow microphone, and have a
-          conversation. This is the exact stack we deploy for clients — just
-          pointed at a demo auto-repair script.
+        <p class="mx-auto mb-8 max-w-2xl text-neutral-400">
+          No signup. Two ways to try it — both live, both real.
         </p>
-        <p class="mt-5 text-sm text-neutral-500">
-          Or call
+        <div class="mx-auto mb-2 flex max-w-2xl flex-wrap items-stretch justify-center gap-3">
           <a
             href="tel:+12545365227"
-            class="font-mono text-red-300 transition hover:text-red-200"
-            >+1 (254) 536-5227</a
+            class="group inline-flex items-center gap-2 rounded-md border border-red-400/50 bg-red-400/15 px-6 py-4 font-medium text-red-100 transition hover:border-red-400/80 hover:bg-red-400/25"
           >
-          to talk to it on a real phone.
+            <span aria-hidden="true">📞</span>
+            <span>
+              <span class="block text-xs font-mono uppercase tracking-wider text-red-300/80">Call from any phone</span>
+              <span class="block font-mono text-lg">+1 (254) 536-5227</span>
+            </span>
+          </a>
+          <a
+            href="#demo-launch"
+            class="group inline-flex items-center gap-2 rounded-md border border-white/10 bg-white/[0.03] px-6 py-4 font-medium text-neutral-200 transition hover:border-white/20 hover:bg-white/[0.06]"
+            onclick="document.getElementById('demo-launch')?.scrollIntoView({behavior:'smooth',block:'center'}); return false;"
+          >
+            <span aria-hidden="true">🌐</span>
+            <span>
+              <span class="block text-xs font-mono uppercase tracking-wider text-neutral-500">Or talk in browser</span>
+              <span class="block text-lg">Click to launch ↓</span>
+            </span>
+          </a>
+        </div>
+        <p class="mt-3 text-xs text-neutral-500">
+          Same agent, same stack we deploy for clients.
         </p>
       </div>
 
