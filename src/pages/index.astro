@@ -480,6 +480,7 @@ const steps = [
 
       const baseUrl = btn.getAttribute("data-demo-url") || "";
       const openTab = document.getElementById("demo-open-tab");
+      const container = btn.closest(".relative");
 
       function urlFor(slug) {
         if (!slug) return baseUrl;
@@ -489,7 +490,16 @@ const steps = [
 
       function setActiveSlug(slug) {
         btn.setAttribute("data-active-slug", slug || "");
-        if (openTab) openTab.setAttribute("href", urlFor(slug));
+        const url = urlFor(slug);
+        if (openTab) openTab.setAttribute("href", url);
+        // If the iframe is already loaded (user launched, then switched tabs),
+        // swap its src so the new client's session connects. Without this,
+        // tab clicks visually highlight but the demo persists on the original
+        // client — silent UX failure.
+        const iframe = container && container.querySelector("iframe");
+        if (iframe) {
+          iframe.src = url;
+        }
       }
 
       // Tab strip wiring (≤8 profiles).
@@ -531,7 +541,6 @@ const steps = [
         const slug = btn.getAttribute("data-active-slug") || "";
         const url = urlFor(slug);
         if (!url) return;
-        const container = btn.closest(".relative");
         if (!container) return;
 
         btn.disabled = true;
