@@ -4,6 +4,15 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  # Fired by keolabs-voice-agent's notify-site workflow whenever a YAML under
+  # clients/** changes on its main branch. The dispatch wakes this build so the
+  # site re-renders with the new tab without a manual demos.json sync.
+  repository_dispatch:
+    types: [clients-changed]
+  # Weekly safety net: if the cross-repo dispatch ever fails (PAT expired,
+  # GitHub outage), this catches up at most 7 days later.
+  schedule:
+    - cron: "0 12 * * 1"
 
 permissions:
   contents: read
@@ -19,6 +28,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      # Pull voice-agent into ./voice-agent so loadDemoProfiles() in
+      # src/pages/index.astro reads live client YAMLs instead of the
+      # checked-in fallback manifest. voice-agent is PRIVATE, so this
+      # needs a fine-grained PAT with Contents:read on the repo, stored
+      # as the VOICE_AGENT_READ_TOKEN secret. If absent, the build still
+      # succeeds via demos.json fallback (continue-on-error).
+      - uses: actions/checkout@v4
+        continue-on-error: true
+        with:
+          repository: Kieldro/keolabs-voice-agent
+          path: voice-agent
+          ref: main
+          token: ${{ secrets.VOICE_AGENT_READ_TOKEN }}
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
@@ -46,5 +68,5 @@ jobs:
             -H "Title: keolabs.ai deployed" \
             -H "Tags: rocket,white_check_mark" \
             -H "Click: ${{ steps.deployment.outputs.page_url }}" \
-            -d "${{ github.event.head_commit.message }}" \
+            -d "${{ github.event.head_commit.message || github.event.action || 'scheduled rebuild' }}" \
             https://ntfy.sh/keolabs-deploys-7ea5b2a08245

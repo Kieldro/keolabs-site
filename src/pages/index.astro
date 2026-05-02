@@ -16,20 +16,28 @@ import demosFallback from "../data/demos.json";
 const VOICE_DEMO_URL =
   import.meta.env.VOICE_DEMO_URL ?? "https://keolabs-voice.pages.dev";
 
-// Discover demo profiles. Prefer the sibling voice-agent repo at build
-// time so adding a new client is one yaml edit; fall back to the
-// checked-in `src/data/demos.json` manifest in environments where the
-// voice-agent isn't available (GitHub Pages CI, fresh clone).
+// Discover demo profiles from voice-agent/clients/. Two checked locations:
+//   1. ../voice-agent/clients   — local dev (sibling repo on the workstation)
+//   2. ./voice-agent/clients    — CI (deploy.yml clones voice-agent into the
+//      site workspace so this build sees the live YAMLs without a manual
+//      demos.json sync step)
+// Falls back to the checked-in src/data/demos.json manifest only when neither
+// path exists (e.g. fresh fork, no GH token to clone the agent repo).
 //
-// To add a profile: add it under voice-agent/clients/<slug>/config.yaml
-// AND mirror it into demos.json so the next CI build picks it up.
+// To add a profile: add it under voice-agent/clients/<slug>/config.yaml and
+// push to keolabs-voice-agent. The voice-agent's notify-site workflow fires a
+// repository_dispatch at this site, which rebuilds within ~2 min.
 interface DemoProfile {
   slug: string;
   name: string;
 }
 function loadDemoProfiles(): DemoProfile[] {
-  const clientsDir = path.resolve(process.cwd(), "../voice-agent/clients");
-  if (fs.existsSync(clientsDir)) {
+  const candidates = [
+    path.resolve(process.cwd(), "../voice-agent/clients"),
+    path.resolve(process.cwd(), "./voice-agent/clients"),
+  ];
+  for (const clientsDir of candidates) {
+    if (!fs.existsSync(clientsDir)) continue;
     const entries = fs.readdirSync(clientsDir, { withFileTypes: true });
     const profiles: DemoProfile[] = [];
     for (const e of entries) {

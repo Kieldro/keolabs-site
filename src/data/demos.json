@@ -1,6 +1,26 @@
 [
-  { "slug": "bobs-auto", "name": "Bob's Auto Repair" },
-  { "slug": "hot-mess-hvac", "name": "Hot Mess Heating & Air" },
-  { "slug": "keolabs", "name": "Keo Labs" },
-  { "slug": "pack-n-throw", "name": "Pack N' Throw Movers" }
+  {
+    "slug": "crossed-wires-electric",
+    "name": "Crossed Wires Electric"
+  },
+  {
+    "slug": "hot-mess-hvac",
+    "name": "Hot Mess Heating & Air"
+  },
+  {
+    "slug": "keolabs",
+    "name": "Keo Labs"
+  },
+  {
+    "slug": "loose-nuts-auto",
+    "name": "Loose Nuts Auto Co."
+  },
+  {
+    "slug": "pack-n-throw",
+    "name": "Pack N' Throw Movers"
+  },
+  {
+    "slug": "yank-it-dental",
+    "name": "Yank It Dental Co."
+  }
 ]
