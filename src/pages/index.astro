@@ -115,108 +115,143 @@ const steps = [
 ---
 
 <Layout>
-  <div
-    class="pointer-events-none fixed inset-0 -z-10 opacity-[0.04]"
-    style="background-image: linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px); background-size: 48px 48px;"
+  <!-- Background atmosphere: paper-grain SVG noise overlay (subtle tactile
+       texture so it doesn't read as flat dark UI) + soft red ink-bleed
+       gradient. Deliberately not a hex grid — that's SaaS-template default. -->
+  <svg
+    class="pointer-events-none fixed inset-0 -z-10 h-full w-full opacity-[0.06]"
+    aria-hidden="true"
+    xmlns="http://www.w3.org/2000/svg"
   >
-  </div>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"></feTurbulence>
+      <feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.6 0"></feColorMatrix>
+    </filter>
+    <rect width="100%" height="100%" filter="url(#grain)"></rect>
+  </svg>
   <div
     class="pointer-events-none fixed inset-0 -z-10"
-    style="background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(239,68,68,0.12), transparent 70%);"
+    style="background: radial-gradient(ellipse 70% 50% at 80% 10%, rgba(239,68,68,0.18), transparent 60%), radial-gradient(ellipse 50% 40% at 10% 90%, rgba(244,63,94,0.10), transparent 70%);"
   >
   </div>
 
-  <nav
-    class="sticky top-0 z-50 border-b border-white/5 bg-neutral-950/70 backdrop-blur"
-  >
-    <div
-      class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4"
-    >
-      <a href="/" class="flex items-center gap-2 font-semibold tracking-tight">
+  <!-- Masthead: editorial header with issue number / dateline. Top hairline
+       rule + bottom hairline rule = book-cover feel, not nav-bar feel. -->
+  <header class="sticky top-0 z-50 border-b border-white/10 bg-neutral-950/80 backdrop-blur">
+    <div class="mx-auto grid max-w-6xl grid-cols-3 items-center gap-4 px-6 py-3">
+      <p class="font-mono text-[10px] tracking-[0.22em] text-neutral-500 uppercase">
+        Vol. 01 — № 02
+      </p>
+      <a href="/" class="flex items-center justify-center gap-2.5">
         <span
-          class="inline-block h-2.5 w-2.5 rounded-sm bg-red-400 shadow-[0_0_12px_rgba(239,68,68,0.6)]"
+          class="inline-block h-2 w-2 rounded-full bg-red-400 shadow-[0_0_10px_rgba(239,68,68,0.7)]"
         ></span>
-        <span>Keo Labs</span>
+        <span class="font-display text-base italic font-medium text-white">Keo&nbsp;Labs</span>
       </a>
-      <div class="flex items-center gap-6 text-sm text-neutral-400">
-        <a href="#what" class="hidden transition hover:text-white sm:inline"
-          >What we build</a
+      <div class="flex items-center justify-end gap-5 text-sm">
+        <a href="#what" class="hidden font-mono text-[11px] tracking-[0.18em] text-neutral-400 uppercase transition hover:text-white sm:inline"
+          >Catalogue</a
         >
-        <a href="#how" class="hidden transition hover:text-white sm:inline"
-          >How it works</a
+        <a href="#how" class="hidden font-mono text-[11px] tracking-[0.18em] text-neutral-400 uppercase transition hover:text-white sm:inline"
+          >Process</a
         >
-        <a href="#demo" class="hidden transition hover:text-white sm:inline"
+        <a href="#demo" class="hidden font-mono text-[11px] tracking-[0.18em] text-neutral-400 uppercase transition hover:text-white sm:inline"
           >Live demo</a
         >
         <a
           href="#contact"
-          class="rounded-md border border-white/10 px-3 py-1.5 text-white transition hover:border-red-400/50 hover:bg-red-400/5"
-          >Book a demo</a
+          class="rounded-full border border-red-400/40 bg-red-400/5 px-4 py-1.5 font-mono text-[11px] tracking-[0.18em] text-red-200 uppercase transition hover:border-red-400 hover:bg-red-400/15"
+          >Book →</a
         >
       </div>
     </div>
-  </nav>
+  </header>
 
-  <section class="relative mx-auto max-w-6xl px-6 pt-24 pb-32 sm:pt-36">
-    <h1
-      class="font-display max-w-4xl text-6xl leading-[0.95] font-medium text-white sm:text-8xl"
-    >
-      AI automation,<br />
-      <span
-        class="italic bg-gradient-to-r from-red-300 via-red-400 to-rose-400 bg-clip-text text-transparent"
-        >built and installed.</span
+  <section class="relative mx-auto max-w-6xl px-6 pt-20 pb-28 sm:pt-28">
+    <!-- Dateline -->
+    <div class="mb-10 flex items-center gap-4 font-mono text-[11px] tracking-[0.22em] text-neutral-500 uppercase">
+      <span class="text-red-400">●</span>
+      <span>The Voice Issue · Spring 2026</span>
+      <span class="hidden h-px flex-1 bg-white/10 sm:block"></span>
+      <span class="hidden sm:inline">Austin, TX</span>
+    </div>
+
+    <!-- Asymmetric headline: oversized italic display pushed left, with a
+         vertical rule + lede column on the right at desktop. -->
+    <div class="grid items-end gap-12 md:grid-cols-12">
+      <h1
+        class="font-display col-span-12 text-[3.5rem] leading-[0.92] font-medium text-white sm:text-[5.5rem] md:col-span-8 md:text-[7rem] lg:text-[8.5rem]"
       >
-    </h1>
-    <p class="mt-8 max-w-2xl text-lg leading-relaxed text-neutral-400 sm:text-xl">
-      Stay ahead of the curve. We build and deploy AI that answers your
-      customers, books your calendar, and qualifies your leads — while your
-      competitors are still wondering if it works.
-    </p>
-    <div class="mt-10 flex flex-wrap items-center gap-4">
+        AI<br />
+        <span class="italic text-neutral-300">automation,</span><br />
+        <span class="italic bg-gradient-to-br from-red-300 via-red-400 to-rose-500 bg-clip-text text-transparent">built &amp;<br />installed.</span>
+      </h1>
+
+      <aside class="col-span-12 border-l border-red-400/30 pl-6 md:col-span-4">
+        <p class="font-mono text-[10px] tracking-[0.22em] text-red-300 uppercase">
+          Lede
+        </p>
+        <p class="mt-3 text-base leading-relaxed text-neutral-300">
+          We build and deploy AI that answers your customers, books your
+          calendar, and qualifies your leads — while your competitors are
+          still wondering <em class="font-display italic text-white">if it works.</em>
+        </p>
+        <p class="mt-5 font-mono text-[10px] tracking-[0.22em] text-neutral-500 uppercase">
+          By the editors of Keo Labs
+        </p>
+      </aside>
+    </div>
+
+    <!-- CTA strip: hairline-divided, monospaced labels — reads as a contents
+         page from a magazine, not a SaaS button row. -->
+    <div class="mt-16 grid grid-cols-1 divide-y divide-white/10 border-y border-white/10 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
       <a
         href="#contact"
-        class="group inline-flex items-center gap-2 rounded-md bg-white px-5 py-3 text-sm font-medium text-neutral-950 transition hover:bg-red-300"
+        class="group flex items-center justify-between gap-4 px-5 py-5 transition hover:bg-red-400/5"
       >
-        Book a demo
-        <span
-          class="transition group-hover:translate-x-0.5"
-          aria-hidden="true">→</span
-        >
+        <span>
+          <span class="block font-mono text-[10px] tracking-[0.22em] text-red-300 uppercase">Primary</span>
+          <span class="font-display mt-1 block text-xl text-white">Book a demo</span>
+        </span>
+        <span class="font-display text-2xl text-red-300 transition group-hover:translate-x-1" aria-hidden="true">→</span>
       </a>
       <a
         href="tel:+12545365227"
-        class="group inline-flex items-center gap-2 rounded-md border border-red-400/40 bg-red-400/10 px-5 py-3 text-sm font-medium text-red-200 transition hover:border-red-400/70 hover:bg-red-400/20"
+        class="group flex items-center justify-between gap-4 px-5 py-5 transition hover:bg-red-400/5"
       >
-        Call (254) 536-5227 — hear it now
-        <span
-          class="transition group-hover:translate-x-0.5"
-          aria-hidden="true">↗</span
-        >
+        <span>
+          <span class="block font-mono text-[10px] tracking-[0.22em] text-neutral-500 uppercase">Hear it now</span>
+          <span class="font-display mt-1 block text-xl text-white">(254) 536-5227</span>
+        </span>
+        <span class="font-display text-2xl text-neutral-500 transition group-hover:text-red-300" aria-hidden="true">↗</span>
       </a>
       <a
         href="#demo"
-        class="inline-flex items-center gap-2 rounded-md border border-white/10 px-5 py-3 text-sm font-medium text-neutral-200 transition hover:border-white/30"
+        class="group flex items-center justify-between gap-4 px-5 py-5 transition hover:bg-red-400/5"
       >
-        Try in browser
-        <span class="text-neutral-500" aria-hidden="true">↓</span>
-      </a>
-      <a
-        href="#what"
-        class="inline-flex items-center gap-2 rounded-md border border-white/10 px-5 py-3 text-sm font-medium text-neutral-200 transition hover:border-white/30"
-      >
-        See what we build
+        <span>
+          <span class="block font-mono text-[10px] tracking-[0.22em] text-neutral-500 uppercase">Browser demo</span>
+          <span class="font-display mt-1 block text-xl text-white">Try it live</span>
+        </span>
+        <span class="font-display text-2xl text-neutral-500 transition group-hover:text-red-300" aria-hidden="true">↓</span>
       </a>
     </div>
 
-    <div
-      class="mt-20 flex flex-wrap gap-x-10 gap-y-2 font-mono text-xs tracking-wide text-neutral-500 uppercase"
-    >
-      <span>Demo in a week</span>
-      <span class="text-neutral-700">/</span>
-      <span>Money-back on setup</span>
-      <span class="text-neutral-700">/</span>
-      <span>Built, deployed, and managed</span>
-    </div>
+    <!-- Stat stripe — the "specs page" feel, mono numerals, vertical hairlines -->
+    <dl class="mt-12 grid grid-cols-3 divide-x divide-white/10 text-center">
+      <div class="px-3 py-2">
+        <dt class="font-mono text-[10px] tracking-[0.22em] text-neutral-500 uppercase">Live in</dt>
+        <dd class="font-display mt-2 text-3xl font-medium text-white sm:text-4xl">2 weeks</dd>
+      </div>
+      <div class="px-3 py-2">
+        <dt class="font-mono text-[10px] tracking-[0.22em] text-neutral-500 uppercase">First month</dt>
+        <dd class="font-display mt-2 text-3xl font-medium text-white sm:text-4xl">Money-back</dd>
+      </div>
+      <div class="px-3 py-2">
+        <dt class="font-mono text-[10px] tracking-[0.22em] text-neutral-500 uppercase">Cancel</dt>
+        <dd class="font-display mt-2 text-3xl font-medium text-white sm:text-4xl">30 days</dd>
+      </div>
+    </dl>
   </section>
 
   <section id="what" class="border-t border-white/10 py-28">
@@ -276,74 +311,105 @@ const steps = [
     </div>
   </section>
 
-  <section id="how" class="border-t border-white/5 py-24">
+  <section id="how" class="border-t border-white/10 py-28">
     <div class="mx-auto max-w-6xl px-6">
-      <div class="mb-14">
-        <p
-          class="mb-3 font-mono text-xs tracking-wider text-red-400 uppercase"
-        >
-          / how it works
+      <div class="mb-20 grid items-end gap-10 md:grid-cols-[1fr_auto]">
+        <div>
+          <p class="mb-5 font-mono text-xs tracking-[0.2em] text-red-400 uppercase">
+            §02 · process
+          </p>
+          <h2 class="font-display text-5xl leading-[0.95] font-medium text-white sm:text-6xl">
+            Pilot in two weeks.<br />
+            <span class="italic text-neutral-500">Scale if it works.</span>
+          </h2>
+        </div>
+        <p class="max-w-xs text-sm leading-relaxed text-neutral-400 md:text-right">
+          Three steps from inbound call to ongoing system. No mystery,
+          no surprise invoices, no annual contract.
         </p>
-        <h2
-          class="max-w-2xl font-display text-4xl font-medium text-white sm:text-5xl"
-        >
-          Pilot in two weeks. Scale if it works.
-        </h2>
       </div>
-      <div class="grid gap-6 sm:grid-cols-3">
-        {
-          steps.map((step) => (
-            <div class="rounded-xl border border-white/5 bg-white/[0.02] p-7">
-              <div class="mb-4 font-mono text-2xl text-red-400">
-                {step.num}
-              </div>
-              <h3 class="mb-3 text-lg font-semibold text-white">
-                {step.title}
-              </h3>
-              <p class="text-sm leading-relaxed text-neutral-400">
-                {step.body}
-              </p>
-            </div>
-          ))
-        }
+
+      <!-- Vertical-rule timeline — runs through giant hand-set numerals.
+           Each entry is a row, not a card. Magazine-style hierarchy. -->
+      <div class="relative">
+        <div class="absolute top-0 bottom-0 left-[3.5rem] w-px bg-gradient-to-b from-red-400/40 via-white/10 to-transparent sm:left-[6rem]" aria-hidden="true"></div>
+        <ol class="space-y-14">
+          {
+            steps.map((step) => (
+              <li class="grid grid-cols-[3.5rem_1fr] items-start gap-6 sm:grid-cols-[6rem_1fr]">
+                <div class="relative flex flex-col items-center">
+                  <span class="font-display text-5xl font-medium leading-none text-red-400 sm:text-7xl">
+                    {step.num}
+                  </span>
+                  <span class="mt-2 h-2.5 w-2.5 rounded-full border-2 border-red-400 bg-neutral-950"></span>
+                </div>
+                <div class="pt-2">
+                  <p class="font-mono text-[10px] tracking-[0.22em] text-neutral-500 uppercase">
+                    Step {step.num}
+                  </p>
+                  <h3 class="font-display mt-1 text-3xl font-medium text-white sm:text-4xl">
+                    {step.title}
+                  </h3>
+                  <p class="mt-4 max-w-2xl text-base leading-relaxed text-neutral-400">
+                    {step.body}
+                  </p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
       </div>
     </div>
   </section>
 
-  <section class="border-t border-white/5 py-24">
-    <div class="mx-auto grid max-w-6xl gap-16 px-6 md:grid-cols-[1fr_2fr]">
-      <div>
-        <p
-          class="mb-3 font-mono text-xs tracking-wider text-red-400 uppercase"
-        >
-          / who builds this
+  <section class="border-t border-white/10 py-28">
+    <div class="mx-auto max-w-6xl px-6">
+      <p class="mb-5 font-mono text-xs tracking-[0.2em] text-red-400 uppercase">
+        §03 · operators
+      </p>
+      <h2 class="font-display max-w-3xl text-5xl leading-[0.95] font-medium text-white sm:text-6xl">
+        Operator-built.<br />
+        <span class="italic text-neutral-500">Not a slide deck.</span>
+      </h2>
+
+      <!-- Pull quote breaks the grid — italic display, vertical red rule.
+           This is what tells a buyer "we're not slop". -->
+      <blockquote class="my-14 max-w-3xl border-l-2 border-red-400 pl-8">
+        <p class="font-display text-2xl leading-snug italic text-white sm:text-3xl">
+          &ldquo;The SMBs on your block will adopt AI in the next two years.
+          The ones that adopt it <em class="not-italic font-medium text-red-300">this year</em> win.&rdquo;
         </p>
-        <h2
-          class="font-display text-4xl font-medium text-white sm:text-5xl"
-        >
-          Operator-built. Not a slide deck.
-        </h2>
-      </div>
-      <div class="space-y-5 text-lg leading-relaxed text-neutral-400">
-        <p>
-          Keo Labs is a team of senior engineers who build and operate AI
-          automations for small and mid-sized businesses. Production-grade
-          software experience, a working AI stack already running, and a
-          focus on systems that hold up under real customer traffic.
-        </p>
-        <p>
-          We build it, we run it, we improve it. You get a working
-          automation wired into your business — without the operational
-          burden of managing your own AI stack.
-        </p>
-        <p>
-          The SMBs on your block will adopt AI in the next two years. The
-          ones that adopt it this year win. We're here to make sure that's
-          you.
-        </p>
-        <p class="font-mono text-sm text-neutral-500">
-          — Keo Labs · Austin, TX
-        </p>
+      </blockquote>
+
+      <div class="grid gap-12 md:grid-cols-2">
+        <div class="space-y-5 text-lg leading-relaxed text-neutral-300">
+          <p>
+            <span class="font-display float-left mr-3 mt-1 text-7xl leading-[0.8] font-medium text-red-400">K</span>eo
+            Labs is a team of senior engineers who build and operate AI
+            automations for small and mid-sized businesses. Production-grade
+            software experience, a working AI stack already running, and a
+            focus on systems that hold up under real customer traffic.
+          </p>
+          <p>
+            We build it, we run it, we improve it. You get a working
+            automation wired into your business — without the operational
+            burden of managing your own AI stack.
+          </p>
+        </div>
+
+        <!-- Specs panel: monospaced "shop info" block -->
+        <aside class="self-start border border-white/10 bg-white/[0.02] p-6">
+          <p class="mb-4 font-mono text-[10px] tracking-[0.22em] text-red-300 uppercase">
+            Colophon
+          </p>
+          <dl class="grid grid-cols-[auto_1fr] gap-x-6 gap-y-3 font-mono text-xs text-neutral-300">
+            <dt class="text-neutral-500 uppercase tracking-[0.18em]">Shop</dt><dd>Solo + senior contractors</dd>
+            <dt class="text-neutral-500 uppercase tracking-[0.18em]">Based</dt><dd>Austin, TX</dd>
+            <dt class="text-neutral-500 uppercase tracking-[0.18em]">Live since</dt><dd>April 2026</dd>
+            <dt class="text-neutral-500 uppercase tracking-[0.18em]">Already</dt><dd>Voice agents · SMS concierge · home automation</dd>
+            <dt class="text-neutral-500 uppercase tracking-[0.18em]">Currently</dt><dd>Booking design partners</dd>
+          </dl>
+        </aside>
       </div>
     </div>
   </section>
